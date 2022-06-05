@@ -1,7 +1,7 @@
 package onnis.samples.bookstore.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -9,6 +9,11 @@ import java.util.Set;
 
 @Getter
 @Setter
+@Builder
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
+
 @Entity
 @Table(name="authors")
 public class Author {
@@ -19,6 +24,8 @@ public class Author {
     private String firstName;
     private String lastName;
 
-    @ManyToMany(mappedBy = "authors")
-    Set<Book> books = new HashSet<>();
+    @JsonIgnore
+    @ManyToMany(mappedBy = "authors", fetch = FetchType.LAZY)
+    @ToString.Exclude
+    Set<Book> books;
 }

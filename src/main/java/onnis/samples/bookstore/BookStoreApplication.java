@@ -1,6 +1,8 @@
 package onnis.samples.bookstore;
 
+import onnis.samples.bookstore.model.Author;
 import onnis.samples.bookstore.model.Book;
+import onnis.samples.bookstore.repository.AuthorRepository;
 import onnis.samples.bookstore.repository.BookRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -14,19 +16,31 @@ public class BookStoreApplication {
     }
 
     @Bean
-    public CommandLineRunner testApp(BookRepository repo) {
+    public CommandLineRunner testApp(BookRepository bookRepo, AuthorRepository authorRepo) {
         return args -> {
-            Book firstBook = new Book();
-            firstBook.setIsbn("XXX-XXXXXX");
-            firstBook.setName("First Book");
+            Author onnis = Author.builder().firstName("Michele").lastName("Onnis").build();
+            Author pintus = Author.builder().firstName("Enrico").lastName("Pintus").build();
 
-            Book secondBook = new Book();
-            secondBook.setIsbn("YYY-YYYYYY");
-            secondBook.setName("Second Book");
-            repo.save(firstBook);
-            repo.save(secondBook);
+            authorRepo.save(onnis);
+            authorRepo.save(pintus);
 
-            repo.findAll().forEach(System.out::println);
+            Book firstBook = Book.builder()
+                    .isbn("XXX-XXXXXX")
+                    .name("First Book")
+                    .author(onnis)
+                    .author(pintus)
+                    .build();
+
+            Book secondBook = Book.builder()
+                    .isbn("YYY-YYYYYY")
+                    .name("Second Book")
+                    .author(onnis)
+                    .build();
+
+            bookRepo.save(firstBook);
+            bookRepo.save(secondBook);
+
+            bookRepo.findAll().forEach(System.out::println);
         };
     }
 }
