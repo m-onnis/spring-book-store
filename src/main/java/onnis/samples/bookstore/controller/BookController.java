@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 
 import org.springframework.data.domain.Pageable;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping(
         path = "/books",
@@ -19,7 +21,8 @@ public class BookController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    Book createBook(@RequestBody Book book) {
+    // @Valid annotation here triggers automatically 400 (Bad Request) when the request body is a not valid Book
+    Book createBook(@RequestBody @Valid Book book) {
         return bookRepo.save(book);
     }
 

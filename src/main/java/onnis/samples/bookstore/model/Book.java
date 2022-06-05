@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,7 +17,10 @@ public class Book {
     @GeneratedValue
     private Long id;
 
+    @NotBlank
     private String isbn;
+
+    @NotBlank
     private String name;
 
     @ManyToMany
