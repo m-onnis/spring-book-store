@@ -4,11 +4,10 @@ import lombok.RequiredArgsConstructor;
 import onnis.samples.bookstore.model.Book;
 import onnis.samples.bookstore.repository.BookRepository;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-
-import org.springframework.data.domain.Pageable;
 
 import javax.validation.Valid;
 
@@ -22,8 +21,9 @@ public class BookController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    // @Valid annotation here triggers automatically 400 (Bad Request) when the request body is a not valid Book
     Book createBook(@Valid @RequestBody Book book) {
+        // @Valid annotation here triggers automatically 400 (Bad Request)
+        // when the request body is a not valid Book
         return bookRepo.save(book);
     }
 

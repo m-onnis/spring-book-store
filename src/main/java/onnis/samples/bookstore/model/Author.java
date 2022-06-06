@@ -14,7 +14,7 @@ import java.util.Set;
 @AllArgsConstructor
 
 @Entity
-@Table(name="authors")
+@Table(name = "authors")
 public class Author {
     @Id
     @GeneratedValue
