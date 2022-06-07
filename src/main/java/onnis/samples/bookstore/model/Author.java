@@ -24,7 +24,7 @@ public class Author {
     private String lastName;
 
     @JsonIgnore
-    @ManyToMany(mappedBy = "authors", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "authors")
     @ToString.Exclude
     Set<Book> books;
 }

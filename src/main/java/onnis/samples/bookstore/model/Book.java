@@ -24,13 +24,14 @@ public class Book {
     private String isbn;
 
     @NotBlank
-    private String name;
+    private String title;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     @JoinTable(name = "book_authors",
             joinColumns = @JoinColumn(name = "book_id"),
             inverseJoinColumns = @JoinColumn(name = "author_id"))
     // @Builder.Default
     @Singular
+    @ToString.Exclude
     Set<Author> authors;
 }

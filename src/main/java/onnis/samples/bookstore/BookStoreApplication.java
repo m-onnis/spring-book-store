@@ -26,14 +26,14 @@ public class BookStoreApplication {
 
             Book firstBook = Book.builder()
                     .isbn("XXX-XXXXXX")
-                    .name("First Book")
+                    .title("First Book")
                     .author(onnis)
                     .author(pintus)
                     .build();
 
             Book secondBook = Book.builder()
                     .isbn("YYY-YYYYYY")
-                    .name("Second Book")
+                    .title("Second Book")
                     .author(onnis)
                     .build();
 
