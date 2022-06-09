@@ -1,0 +1,57 @@
+---
+env:
+  browser: true
+  es2022: true
+extends:
+- standard-with-typescript
+- plugin:react/recommended
+parserOptions:
+  project: 'tsconfig.json'
+  ecmaVersion: 12
+  sourceType: module
+  ecmaFeatures:
+    jsx: true
+plugins:
+- import
+- react
+- react-hooks
+ignorePatterns:
+- node_modules
+- dist
+- build
+- coverage
+settings:
+  react:
+    version: detect
+rules:
+  import/order:
+  - warn
+  - newlines-between: always
+  padding-line-between-statements:
+  - warn
+  - blankLine: always
+    prev: "*"
+    next: block
+  - blankLine: always
+    prev: block
+    next: "*"
+  - blankLine: always
+    prev: "*"
+    next: block-like
+  - blankLine: always
+    prev: block-like
+    next: "*"
+  - blankLine: always
+    prev: "*"
+    next: return
+  react-hooks/rules-of-hooks: error
+  react/prop-types: 'off'
+  react/jsx-indent:
+  - warn
+  - 2
+  - checkAttributes: true
+    indentLogicalExpressions: true
+  jsx-quotes:
+  - error
+  - prefer-double
+  multiline-ternary: warn
