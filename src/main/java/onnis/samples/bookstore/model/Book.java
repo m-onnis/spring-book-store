@@ -1,5 +1,6 @@
 package onnis.samples.bookstore.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -26,6 +27,7 @@ public class Book {
     @NotBlank
     private String title;
 
+    @JsonIgnore
     @ManyToMany
     @JoinTable(name = "book_authors",
             joinColumns = @JoinColumn(name = "book_id"),

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping(
         path = "/books",
         produces = MediaType.APPLICATION_JSON_VALUE)
