@@ -1,11 +1,16 @@
 import React from 'react'
+import { Container } from 'react-bootstrap'
+import { BrowserRouter } from 'react-router-dom'
 
-// import logo from './logo.svg'
 import './App.css'
-import BootstrapCheatSheet from './components/bootstrapcheatsheet'
+import AppRouter from './AppRouter'
 
 function App (): JSX.Element {
-  return <BootstrapCheatSheet />
+  return <BrowserRouter>
+    <Container>
+      <AppRouter />
+    </Container>
+  </BrowserRouter>
 }
 
 export default App
