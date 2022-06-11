@@ -4,27 +4,22 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.Set;
 
 @Getter
 @Setter
 @Builder
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 
 @Entity
 @Table(name = "authors")
-public class Author {
-    @Id
-    @GeneratedValue
-    private Long id;
-
-    private String firstName;
-    private String lastName;
+public class Author extends BaseEntity {
+    @NotBlank private String firstName;
+    @NotBlank private String lastName;
 
     @JsonIgnore
     @ManyToMany(mappedBy = "authors")
-    @ToString.Exclude
     Set<Book> books;
 }

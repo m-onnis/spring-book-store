@@ -10,22 +10,14 @@ import java.util.Set;
 @Getter
 @Setter
 @Builder
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 
 @Entity
 @Table(name = "books")
-public class Book {
-    @Id
-    @GeneratedValue
-    private Long id;
-
-    @NotBlank
-    private String isbn;
-
-    @NotBlank
-    private String title;
+public class Book extends BaseEntity {
+    @NotBlank private String isbn;
+    @NotBlank private String title;
 
     @JsonIgnore
     @ManyToMany
@@ -34,6 +26,5 @@ public class Book {
             inverseJoinColumns = @JoinColumn(name = "author_id"))
     // @Builder.Default
     @Singular
-    @ToString.Exclude
     Set<Author> authors;
 }
