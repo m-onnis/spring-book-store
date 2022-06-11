@@ -2,11 +2,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 import config from '../config'
-
-interface Book {
-  title: string
-  isbn: string
-}
+import { Book } from '../types'
 
 // Define our single API slice object
 export const apiSlice = createApi({
