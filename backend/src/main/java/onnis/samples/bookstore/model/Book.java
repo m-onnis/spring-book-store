@@ -1,15 +1,17 @@
 package onnis.samples.bookstore.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 @Getter
 @Setter
-@Builder
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 
@@ -19,12 +21,16 @@ public class Book extends BaseEntity {
     @NotBlank private String isbn;
     @NotBlank private String title;
 
-    @JsonIgnore
-    @ManyToMany
+    // @JsonIgnore
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "book_authors",
             joinColumns = @JoinColumn(name = "book_id"),
             inverseJoinColumns = @JoinColumn(name = "author_id"))
-    // @Builder.Default
+    @JsonManagedReference
     @Singular
-    Set<Author> authors;
+    private Set<Author> authors;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @NotNull
+    private Publisher publisher;
 }

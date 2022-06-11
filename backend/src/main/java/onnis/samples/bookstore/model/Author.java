@@ -1,7 +1,8 @@
 package onnis.samples.bookstore.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -9,7 +10,7 @@ import java.util.Set;
 
 @Getter
 @Setter
-@Builder
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 
@@ -19,7 +20,8 @@ public class Author extends BaseEntity {
     @NotBlank private String firstName;
     @NotBlank private String lastName;
 
-    @JsonIgnore
+    // @JsonIgnore
+    @JsonBackReference
     @ManyToMany(mappedBy = "authors")
     Set<Book> books;
 }
