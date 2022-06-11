@@ -1,34 +1,11 @@
-import { AxiosResponse } from 'axios'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
-import axios from '../utils/axiosbackend'
-
-interface Book {
-  title: string
-  isbn: string
-}
-
-const getBooks = async (): Promise<Book[]> => {
-  // const response: Response = await fetch('http://localhost:8080/books')
-
-  const response: AxiosResponse = await axios.get('/books')
-
-  console.log(response.data.content)
-
-  return response.data.content
-}
+import { useGetBooksQuery } from '../redux/apislice'
 
 export default function HomePage (): JSX.Element {
-  const [books, setBooks] = useState<Book[]>([])
+  const { data: books, /* error, */isLoading } = useGetBooksQuery()
 
-  useEffect(() => {
-    const perform = async (): Promise<void> => {
-      const theBooks: Book[] = await getBooks()
-      setBooks(theBooks)
-    }
-
-    void perform()
-  }, [])
+  if (isLoading) return <></>
 
   return <>
     <p style={{ marginTop: '100px' }}>{JSON.stringify(books)}</p>
