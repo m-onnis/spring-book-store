@@ -2,7 +2,9 @@ import React from 'react'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Card from 'react-bootstrap/Card'
+import Button from 'react-bootstrap/Button'
 import ListGroup from 'react-bootstrap/ListGroup'
+import { LinkContainer } from 'react-router-bootstrap'
 
 import { useGetBooksQuery } from '../redux/apislice'
 import { Book } from '../types'
@@ -61,7 +63,14 @@ export default function BookList (): JSX.Element {
 
         { books?.map(b => <BookRow key={b.id} book={b}/>) }
 
+        <ListGroup.Item>
+          <LinkContainer to="/book/new">
+            <Button>New Book</Button>
+          </LinkContainer>
+        </ListGroup.Item>
+
       </ListGroup>
+
     </Card>
   </>
 }

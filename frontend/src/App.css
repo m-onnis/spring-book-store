@@ -5,3 +5,11 @@ body {
 html {
   font-size: 0.875rem;
 }
+
+label.form-label {
+  margin-bottom: 0px !important;
+  text-transform: uppercase !important;
+  font-size: 12px !important;
+  font-weight: bold !important;
+  color: darkgray !important;
+}

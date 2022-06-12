@@ -17,9 +17,17 @@ export const apiSlice = createApi({
     getBooks: builder.query<Book[], void>({
       // The URL for the request is '/books'
       query: () => '/books'
+    }),
+
+    createBook: builder.mutation<Book, any>({
+      query: (book) => ({
+        url: '/books',
+        method: 'POST',
+        body: book
+      })
     })
   })
 })
 
 // Export the auto-generated hook for the `getBooks` query endpoint
-export const { useGetBooksQuery } = apiSlice
+export const { useGetBooksQuery, useCreateBookMutation } = apiSlice
