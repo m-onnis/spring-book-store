@@ -1,6 +1,5 @@
-/* eslint-disable @typescript-eslint/no-misused-promises */
 import React from 'react'
-import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
+import { FormProvider, useForm } from 'react-hook-form'
 import * as Yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import Form from 'react-bootstrap/Form'
@@ -21,13 +20,13 @@ const BookFieldsSchema = Yup.object().shape({
   authors: Yup.array(Yup.number())
 })
 
-function onKeyDown (keyEvent: React.KeyboardEvent<HTMLElement>): void {
+function onKeyDown (keyEvent) {
   if (keyEvent.key === 'Enter') {
     keyEvent.preventDefault()
   }
 }
 
-export default function NewBookPage (): JSX.Element {
+export default function NewBookPage () {
   const [createBook/* , result */] = useCreateBookMutation()
 
   const defaultFormValues = {
@@ -46,14 +45,14 @@ export default function NewBookPage (): JSX.Element {
     resolver: yupResolver(BookFieldsSchema)
   })
 
-  const onSubmit: SubmitHandler<any> = (data) => {
+  const onSubmit = (data) => {
     console.log(data)
 
     return createBook(data)
   }
 
   return <FormProvider {...formMethods}>
-    <Form onKeyDown={ onKeyDown } onSubmit={ formMethods.handleSubmit(onSubmit) }>
+    <Form onKeyDown={onKeyDown} onSubmit={formMethods.handleSubmit(onSubmit)}>
 
       <Card className="mt-3">
         <ListGroup variant="flush">
@@ -81,7 +80,7 @@ export default function NewBookPage (): JSX.Element {
           {/* Submit */}
           <ListGroup.Item>
             <Button type="submit" variant="success" disabled={!formMethods.formState.isValid}>
-              <FaSave className="me-2 lg"/>Submit
+              <FaSave className="me-2 lg" />Submit
             </Button>
           </ListGroup.Item>
 

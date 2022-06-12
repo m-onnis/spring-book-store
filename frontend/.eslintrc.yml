@@ -3,10 +3,9 @@ env:
   browser: true
   es2022: true
 extends:
-- standard-with-typescript
+- standard
 - plugin:react/recommended
 parserOptions:
-  project: 'tsconfig.json'
   ecmaVersion: 12
   sourceType: module
   ecmaFeatures:

@@ -8,7 +8,7 @@ import AppNavbar from './AppNavbar'
 import AppRouter from './AppRouter'
 import { store } from './redux/store'
 
-export default function App (): JSX.Element {
+export default function App () {
   return (
     <Provider store={store}>
       <BrowserRouter>

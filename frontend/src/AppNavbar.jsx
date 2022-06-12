@@ -2,7 +2,7 @@ import React from 'react'
 import { Container, Nav, Navbar } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 
-export default function AppNavbar (): JSX.Element {
+export default function AppNavbar () {
   return <Navbar fixed="top" bg="light">
     <Container>
       <Navbar.Brand href="/">Navbar</Navbar.Brand>

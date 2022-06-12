@@ -7,29 +7,24 @@ import ListGroup from 'react-bootstrap/ListGroup'
 import { LinkContainer } from 'react-router-bootstrap'
 
 import { useGetBooksQuery } from '../redux/apislice'
-import { Book } from '../types'
 
-interface BookRowProps {
-  book: Book
-}
-
-const BookRow = ({ book }: BookRowProps): JSX.Element => {
-  const authors: string = book.authors
+const BookRow = ({ book }) => {
+  const authors = book.authors
     .map(a => [a.firstName, a.lastName].join(' '))
     .join(', ')
 
   return <ListGroup.Item>
     <Row>
-      <Col>{ book.title }</Col>
-      <Col>{ book.isbn }</Col>
-      <Col>{ book.publisher.name }</Col>
-      <Col>{ authors }</Col>
+      <Col>{book.title}</Col>
+      <Col>{book.isbn}</Col>
+      <Col>{book.publisher.name}</Col>
+      <Col>{authors}</Col>
     </Row>
   </ListGroup.Item>
 }
 
-export default function BookList (): JSX.Element {
-  const { data: books, /* error, */isLoading } = useGetBooksQuery()
+export default function BookList () {
+  const { data: books, isLoading } = useGetBooksQuery()
 
   if (isLoading) return <></>
 
@@ -61,7 +56,7 @@ export default function BookList (): JSX.Element {
           </Row>
         </ListGroup.Item>
 
-        { books?.map(b => <BookRow key={b.id} book={b}/>) }
+        {books?.map(b => <BookRow key={b.id} book={b} />)}
 
         <ListGroup.Item>
           <LinkContainer to="/book/new">

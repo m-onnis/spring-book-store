@@ -5,7 +5,7 @@ import 'bootstrap/dist/js/bootstrap.js'
 
 import './bootstrapcheatsheet.css'
 
-export default function BootstrapCheatSheet (): JSX.Element {
+export default function BootstrapCheatSheet () {
   return (
     <>
       <div id="bootstrap-cheatsheet">

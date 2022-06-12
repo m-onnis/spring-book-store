@@ -2,7 +2,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 import config from '../config'
-import { Book } from '../types'
 
 // Define our single API slice object
 export const apiSlice = createApi({
@@ -13,13 +12,12 @@ export const apiSlice = createApi({
   // The "endpoints" represent operations and requests for this server
   endpoints: builder => ({
     // The `getBooks` endpoint is a "query" operation that returns data
-    // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
-    getBooks: builder.query<Book[], void>({
+    getBooks: builder.query({
       // The URL for the request is '/books'
-      query: () => '/books'
+      query: () => ({ url: '/books' })
     }),
 
-    createBook: builder.mutation<Book, any>({
+    createBook: builder.mutation({
       query: (book) => ({
         url: '/books',
         method: 'POST',
@@ -30,4 +28,7 @@ export const apiSlice = createApi({
 })
 
 // Export the auto-generated hook for the `getBooks` query endpoint
-export const { useGetBooksQuery, useCreateBookMutation } = apiSlice
+export const {
+  useGetBooksQuery,
+  useCreateBookMutation
+} = apiSlice

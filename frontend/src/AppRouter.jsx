@@ -5,7 +5,7 @@ import BootstrapPage from './pages/BootstrapPage'
 import HomePage from './pages/HomePage'
 import NewBookPage from './pages/NewBookPage'
 
-export default function AppRouter (): JSX.Element {
+export default function AppRouter () {
   return <Routes>
     <Route path="/" element={<HomePage />} />
     <Route path="/home" element={<HomePage />} />
