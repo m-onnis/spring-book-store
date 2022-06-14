@@ -10,14 +10,20 @@ import Card from 'react-bootstrap/Card'
 import ListGroup from 'react-bootstrap/ListGroup'
 import { FaSave } from 'react-icons/fa'
 
+import TypeaheadField from '../components/TypeaheadField'
 import FormField from '../components/FormField'
-import { useCreateBookMutation } from '../redux/apislice'
+import { useCreateBookMutation, useGetAuthorsQuery } from '../redux/apislice'
 
 const BookFieldsSchema = Yup.object().shape({
   title: Yup.string().required(),
   isbn: Yup.string().required(),
   publisher: Yup.number().required(),
-  authors: Yup.array(Yup.number())
+  authors: Yup.array(
+    Yup.object({
+      id: Yup.number(),
+      name: Yup.string()
+    }))
+    .min(1)
 })
 
 function onKeyDown (keyEvent) {
@@ -29,11 +35,13 @@ function onKeyDown (keyEvent) {
 export default function NewBookPage () {
   const [createBook/* , result */] = useCreateBookMutation()
 
+  const { data: authors, isLoading } = useGetAuthorsQuery()
+
   const defaultFormValues = {
     title: '',
     isbn: '',
     publisher: 1,
-    authors: [1, 2]
+    authors: []
   }
 
   const {
@@ -45,11 +53,19 @@ export default function NewBookPage () {
     resolver: yupResolver(BookFieldsSchema)
   })
 
-  const onSubmit = (data) => {
-    console.log(data)
+  if (isLoading) return null
 
-    return createBook(data)
+  const onSubmit = (data) => {
+    const book = { ...data }
+    // REST API wants an array of ids
+    book.authors = data.authors.map(a => a.id)
+    createBook(book)
   }
+
+  // typeahead controls want { id, label } objects
+  const options = authors.map(a => ({
+    id: a.id, label: `${a.firstName} ${a.lastName}`
+  }))
 
   return <FormProvider {...formMethods}>
     <Form onKeyDown={onKeyDown} onSubmit={formMethods.handleSubmit(onSubmit)}>
@@ -62,18 +78,32 @@ export default function NewBookPage () {
             <h4 className="mt-2 mb-4">New Book</h4>
 
             <Row className="mb-2">
-              <Form.Group as={Col} md={6} className="position-relative">
+              <Col md={6}>
+
+                <Row className="mb-2">
+                  <Form.Group as={Col} className="position-relative">
+                    <TypeaheadField fieldLabel="Authors"
+                        id="multi-typeahead"
+                        name="authors"
+                        clearButton
+                        multiple
+                        options={options} />
+                  </Form.Group>
+                </Row>
+
                 <Row className="mb-2">
                   <Form.Group as={Col} className="position-relative">
                     <FormField type="text" name="title" fieldLabel="Title" />
                   </Form.Group>
                 </Row>
+
                 <Row className="mb-2">
                   <Form.Group as={Col} className="position-relative">
                     <FormField type="text" name="isbn" fieldLabel="ISBN" />
                   </Form.Group>
                 </Row>
-              </Form.Group>
+
+              </Col>
             </Row>
           </ListGroup.Item>
 

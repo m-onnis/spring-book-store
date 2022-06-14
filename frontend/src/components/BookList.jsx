@@ -59,7 +59,7 @@ export default function BookList () {
         {books?.map(b => <BookRow key={b.id} book={b} />)}
 
         <ListGroup.Item>
-          <LinkContainer to="/book/new">
+          <LinkContainer to="/books/new">
             <Button>New Book</Button>
           </LinkContainer>
         </ListGroup.Item>

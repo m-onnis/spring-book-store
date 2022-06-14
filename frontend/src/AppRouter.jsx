@@ -9,7 +9,7 @@ export default function AppRouter () {
   return <Routes>
     <Route path="/" element={<HomePage />} />
     <Route path="/home" element={<HomePage />} />
-    <Route path="/book/new" element={<NewBookPage />} />
+    <Route path="/books/new" element={<NewBookPage />} />
     <Route path="/bootstrap" element={<BootstrapPage />} />
   </Routes>
 }

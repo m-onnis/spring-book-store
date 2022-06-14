@@ -8,9 +8,10 @@ import reportWebVitals from './reportWebVitals'
 // Importing the Bootstrap CSS
 import 'bootstrap/dist/css/bootstrap.min.css'
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root')
-)
+// Importing the react-bootstrap-typeahead css
+import 'react-bootstrap-typeahead/css/Typeahead.css'
+
+const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <React.StrictMode>
     <App />

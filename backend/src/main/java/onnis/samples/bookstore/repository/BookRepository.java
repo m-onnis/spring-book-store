@@ -9,6 +9,7 @@ import java.util.List;
 
 public interface BookRepository extends JpaRepository<Book, Long> {
     @EntityGraph(attributePaths = {"authors", "publisher"})
+    @Override
     List<Book> findAll();
 
     List<BookDto> findAllProjectedBy();

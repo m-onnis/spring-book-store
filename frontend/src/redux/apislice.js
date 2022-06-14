@@ -17,6 +17,14 @@ export const apiSlice = createApi({
       query: () => ({ url: '/books' })
     }),
 
+    getPublishers: builder.query({
+      query: () => ({ url: '/publishers' })
+    }),
+
+    getAuthors: builder.query({
+      query: () => ({ url: '/authors' })
+    }),
+
     createBook: builder.mutation({
       query: (book) => ({
         url: '/books',
@@ -30,5 +38,7 @@ export const apiSlice = createApi({
 // Export the auto-generated hook for the `getBooks` query endpoint
 export const {
   useGetBooksQuery,
+  useGetAuthorsQuery,
+  useGetPublishersQuery,
   useCreateBookMutation
 } = apiSlice
