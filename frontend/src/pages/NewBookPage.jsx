@@ -10,18 +10,28 @@ import Card from 'react-bootstrap/Card'
 import ListGroup from 'react-bootstrap/ListGroup'
 import { FaSave } from 'react-icons/fa'
 
-import TypeaheadField from '../components/TypeaheadField'
-import FormField from '../components/FormField'
-import { useCreateBookMutation, useGetAuthorsQuery } from '../redux/apislice'
+import FormField from '../components/form/FormField'
+import { useCreateBookMutation } from '../redux/apislice'
+import AuthorsSelector from '../components/AuthorsSelector'
+import PublisherSelector from '../components/PublisherSelector'
 
 const BookFieldsSchema = Yup.object().shape({
   title: Yup.string().required(),
   isbn: Yup.string().required(),
-  publisher: Yup.number().required(),
-  authors: Yup.array(
-    Yup.object({
+
+  // multi selection from typeahead control (still an array)
+  publisher: Yup.array(
+    Yup.object().shape({
       id: Yup.number(),
-      name: Yup.string()
+      label: Yup.string()
+    }))
+    .min(1),
+
+  // multi selection from typeahead
+  authors: Yup.array(
+    Yup.object().shape({
+      id: Yup.number(),
+      label: Yup.string()
     }))
     .min(1)
 })
@@ -34,8 +44,6 @@ function onKeyDown (keyEvent) {
 
 export default function NewBookPage () {
   const [createBook/* , result */] = useCreateBookMutation()
-
-  const { data: authors, isLoading } = useGetAuthorsQuery()
 
   const defaultFormValues = {
     title: '',
@@ -53,19 +61,15 @@ export default function NewBookPage () {
     resolver: yupResolver(BookFieldsSchema)
   })
 
-  if (isLoading) return null
-
   const onSubmit = (data) => {
     const book = { ...data }
-    // REST API wants an array of ids
+    // REST API wants id or array of ids
     book.authors = data.authors.map(a => a.id)
+    const [publisher] = data.publisher
+    book.publisher = publisher.id
+
     createBook(book)
   }
-
-  // typeahead controls want { id, label } objects
-  const options = authors.map(a => ({
-    id: a.id, label: `${a.firstName} ${a.lastName}`
-  }))
 
   return <FormProvider {...formMethods}>
     <Form onKeyDown={onKeyDown} onSubmit={formMethods.handleSubmit(onSubmit)}>
@@ -82,12 +86,13 @@ export default function NewBookPage () {
 
                 <Row className="mb-2">
                   <Form.Group as={Col} className="position-relative">
-                    <TypeaheadField fieldLabel="Authors"
-                        id="multi-typeahead"
-                        name="authors"
-                        clearButton
-                        multiple
-                        options={options} />
+                    <AuthorsSelector />
+                  </Form.Group>
+                </Row>
+
+                <Row className="mb-2">
+                  <Form.Group as={Col} className="position-relative">
+                    <PublisherSelector />
                   </Form.Group>
                 </Row>
 
