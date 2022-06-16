@@ -2,15 +2,13 @@
 
 const runEnvironment = process.env.NODE_ENV
 const domain = window.location.hostname
-const baseUrl = `http://${domain}:8080`
 
 const config = {
   env: runEnvironment,
   // version: packageInfo.version,
 
   domain,
-  baseUrl,
-  apiUrl: `${baseUrl}`
+  apiUrl: `http://${domain}:8080`
 }
 
 export default config

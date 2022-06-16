@@ -14,15 +14,18 @@ export const apiSlice = createApi({
     // The `getBooks` endpoint is a "query" operation that returns data
     getBooks: builder.query({
       // The URL for the request is '/books'
-      query: () => ({ url: '/books' })
+      query: () => ({ url: '/books' }),
+      providesTags: ['books']
     }),
 
     getPublishers: builder.query({
-      query: () => ({ url: '/publishers' })
+      query: () => ({ url: '/publishers' }),
+      providesTags: ['publishers']
     }),
 
     getAuthors: builder.query({
-      query: () => ({ url: '/authors' })
+      query: () => ({ url: '/authors' }),
+      providesTags: ['authors']
     }),
 
     createBook: builder.mutation({
@@ -30,7 +33,26 @@ export const apiSlice = createApi({
         url: '/books',
         method: 'POST',
         body: book
-      })
+      }),
+      invalidatesTags: ['books']
+    }),
+
+    createPublisher: builder.mutation({
+      query: (publisher) => ({
+        url: '/publishers',
+        method: 'POST',
+        body: publisher
+      }),
+      invalidatesTags: ['publishers']
+    }),
+
+    createAuthor: builder.mutation({
+      query: (author) => ({
+        url: '/authors',
+        method: 'POST',
+        body: author
+      }),
+      invalidatesTags: ['authors']
     })
   })
 })
@@ -40,5 +62,7 @@ export const {
   useGetBooksQuery,
   useGetAuthorsQuery,
   useGetPublishersQuery,
-  useCreateBookMutation
+  useCreateBookMutation,
+  useCreatePublisherMutation,
+  useCreateAuthorMutation
 } = apiSlice

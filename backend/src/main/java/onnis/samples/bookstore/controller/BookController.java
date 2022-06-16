@@ -22,19 +22,19 @@ public class BookController {
 
     private final BookService bookService;
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    List<Book> books() {
+        return bookRepo.findAll();
+        // return bookRepo.findAllProjectedBy();
+    }
+
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     Book createBook(@Valid @RequestBody BookCreationDto bookDto) {
         // @Valid annotation here triggers automatically 400 (Bad Request)
         // when the request body is a not valid Book
         // return bookRepo.save(book);
         return bookService.create(bookDto);
-    }
-
-    @GetMapping
-    @ResponseStatus(HttpStatus.OK)
-    List<Book> books() {
-        return bookRepo.findAll();
-        // return bookRepo.findAllProjectedBy();
     }
 }

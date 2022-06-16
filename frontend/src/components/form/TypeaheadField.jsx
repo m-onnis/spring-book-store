@@ -24,7 +24,7 @@ export default function TypeaheadField ({ fieldLabel, name, ...props }) {
     // see https://github.com/ericgio/react-bootstrap-typeahead/issues/432
     // see https://codesandbox.io/s/4w01px4z6x
     className={ invalid ? 'is-invalid' : ''}
-    isInvalid={invalid} />
+    isInvalid={ invalid } />
 
   return <>
     {fieldLabel !== undefined ? <Form.Label>{fieldLabel}</Form.Label> : null}

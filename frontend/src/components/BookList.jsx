@@ -10,7 +10,7 @@ import { useGetBooksQuery } from '../redux/apislice'
 
 const BookRow = ({ book }) => {
   const authors = book.authors
-    .map(a => [a.firstName, a.lastName].join(' '))
+    .map(a => `${a.firstName} ${a.lastName}`)
     .join(', ')
 
   return <ListGroup.Item>
@@ -49,10 +49,10 @@ export default function BookList () {
 
         <ListGroup.Item>
           <Row>
-            <Col>Title</Col>
-            <Col>ISBN</Col>
-            <Col>Publisher</Col>
-            <Col>Authors</Col>
+            <Col><strong>Title</strong></Col>
+            <Col><strong>ISBN</strong></Col>
+            <Col><strong>Publisher</strong></Col>
+            <Col><strong>Authors</strong></Col>
           </Row>
         </ListGroup.Item>
 
