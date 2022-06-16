@@ -2,11 +2,11 @@ import React from 'react'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Card from 'react-bootstrap/Card'
-import Button from 'react-bootstrap/Button'
 import ListGroup from 'react-bootstrap/ListGroup'
-import { LinkContainer } from 'react-router-bootstrap'
 
 import { useGetBooksQuery } from '../redux/apislice'
+
+import NewBookForm from './NewBookForm'
 
 const BookRow = ({ book }) => {
   const authors = book.authors
@@ -58,14 +58,10 @@ export default function BookList () {
 
         {books?.map(b => <BookRow key={b.id} book={b} />)}
 
-        <ListGroup.Item>
-          <LinkContainer to="/books/new">
-            <Button>New Book</Button>
-          </LinkContainer>
-        </ListGroup.Item>
-
       </ListGroup>
 
     </Card>
+
+    <NewBookForm />
   </>
 }

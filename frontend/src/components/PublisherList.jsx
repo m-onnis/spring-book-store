@@ -10,6 +10,7 @@ import { FormProvider, useForm } from 'react-hook-form'
 import Button from 'react-bootstrap/Button'
 import { FaPlus } from 'react-icons/fa'
 
+import { useMutationErrors } from '../hooks/resterrors'
 import { useCreatePublisherMutation, useGetPublishersQuery } from '../redux/apislice'
 
 import FormField from './form/FormField'
@@ -29,7 +30,7 @@ const PublisherFieldsSchema = Yup.object().shape({
 const defaultFormValues = { name: '' }
 
 const NewPublisherRow = () => {
-  const [createPublisher/* , result */] = useCreatePublisherMutation()
+  const [createPublisher, { error }] = useCreatePublisherMutation()
 
   const {
     ...formMethods
@@ -46,7 +47,7 @@ const NewPublisherRow = () => {
     }
   }, [formMethods])
 
-  // useMutationErrors(error, formMethods.setError)
+  useMutationErrors(error, formMethods.setError)
 
   const onSubmit = (values) => {
     // form values should match REST API

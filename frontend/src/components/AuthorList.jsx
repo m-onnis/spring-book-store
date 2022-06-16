@@ -10,6 +10,7 @@ import { FormProvider, useForm } from 'react-hook-form'
 import Button from 'react-bootstrap/Button'
 import { FaPlus } from 'react-icons/fa'
 
+import { useMutationErrors } from '../hooks/resterrors'
 import { useCreateAuthorMutation, useGetAuthorsQuery } from '../redux/apislice'
 
 import FormField from './form/FormField'
@@ -31,7 +32,7 @@ const AuthorFieldsSchema = Yup.object().shape({
 const defaultFormValues = { firstName: '', lastName: '' }
 
 const NewAuthorRow = () => {
-  const [createAuthor/* , result */] = useCreateAuthorMutation()
+  const [createAuthor, { error }] = useCreateAuthorMutation()
 
   const {
     ...formMethods
@@ -48,7 +49,7 @@ const NewAuthorRow = () => {
     }
   }, [formMethods])
 
-  // useMutationErrors(error, formMethods.setError)
+  useMutationErrors(error, formMethods.setError)
 
   const onSubmit = (values) => {
     // form values should match REST API

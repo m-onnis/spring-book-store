@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import * as Yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -10,10 +10,12 @@ import Card from 'react-bootstrap/Card'
 import ListGroup from 'react-bootstrap/ListGroup'
 import { FaSave } from 'react-icons/fa'
 
-import FormField from '../components/form/FormField'
 import { useCreateBookMutation } from '../redux/apislice'
-import AuthorsSelector from '../components/AuthorsSelector'
-import PublisherSelector from '../components/PublisherSelector'
+import { useMutationErrors } from '../hooks/resterrors'
+
+import FormField from './form/FormField'
+import AuthorsSelector from './AuthorsSelector'
+import PublisherSelector from './PublisherSelector'
 
 const BookFieldsSchema = Yup.object().shape({
   title: Yup.string().required(),
@@ -42,13 +44,13 @@ function onKeyDown (keyEvent) {
   }
 }
 
-export default function NewBookPage () {
-  const [createBook/* , result */] = useCreateBookMutation()
+export default function NewBookForm () {
+  const [createBook, { error }] = useCreateBookMutation()
 
   const defaultFormValues = {
     title: '',
     isbn: '',
-    publisher: 1,
+    publisher: [],
     authors: []
   }
 
@@ -66,10 +68,18 @@ export default function NewBookPage () {
     // REST API wants id or array of ids
     book.authors = data.authors.map(a => a.id)
     const [publisher] = data.publisher
-    book.publisher = publisher.id
+    book.publisher = publisher?.id
 
     createBook(book)
   }
+
+  useEffect(() => {
+    if (formMethods.formState.isSubmitSuccessful) {
+      formMethods.reset(defaultFormValues)
+    }
+  }, [formMethods])
+
+  useMutationErrors(error, formMethods.setError)
 
   return <FormProvider {...formMethods}>
     <Form onKeyDown={onKeyDown} onSubmit={formMethods.handleSubmit(onSubmit)}>
@@ -82,33 +92,22 @@ export default function NewBookPage () {
             <h4 className="mt-2 mb-4">New Book</h4>
 
             <Row className="mb-2">
-              <Col md={6}>
+              <Form.Group as={Col} className="position-relative">
+                <FormField type="text" name="title" fieldLabel="Title" />
+              </Form.Group>
 
-                <Row className="mb-2">
-                  <Form.Group as={Col} className="position-relative">
-                    <AuthorsSelector />
-                  </Form.Group>
-                </Row>
+              <Form.Group as={Col} className="position-relative">
+                <FormField type="text" name="isbn" fieldLabel="ISBN" />
+              </Form.Group>
+            </Row>
 
-                <Row className="mb-2">
-                  <Form.Group as={Col} className="position-relative">
-                    <PublisherSelector />
-                  </Form.Group>
-                </Row>
-
-                <Row className="mb-2">
-                  <Form.Group as={Col} className="position-relative">
-                    <FormField type="text" name="title" fieldLabel="Title" />
-                  </Form.Group>
-                </Row>
-
-                <Row className="mb-2">
-                  <Form.Group as={Col} className="position-relative">
-                    <FormField type="text" name="isbn" fieldLabel="ISBN" />
-                  </Form.Group>
-                </Row>
-
-              </Col>
+            <Row className="mb-2">
+              <Form.Group as={Col} className="position-relative">
+                <AuthorsSelector />
+              </Form.Group>
+              <Form.Group as={Col} className="position-relative">
+                <PublisherSelector />
+              </Form.Group>
             </Row>
           </ListGroup.Item>
 
