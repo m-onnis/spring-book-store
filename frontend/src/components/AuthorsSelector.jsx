@@ -15,8 +15,11 @@ export default function AuthorsSelector () {
   }))
 
   return (
-    <TypeaheadField fieldLabel="Authors"
-      id="multi-typeahead" name="authors" clearButton
-      multiple options={options} />
+    <TypeaheadField fieldLabel="Authors" name="authors"
+      placeholder="Choose authors..."
+      id="multi-typeahead"
+      clearButton
+      multiple
+      options={options} />
   )
 }

@@ -15,7 +15,9 @@ export default function PublisherSelector () {
   }))
 
   return (
-    <TypeaheadField fieldLabel="Publishers"
-      id="typeahead" name="publisher" options={options} />
+    <TypeaheadField fieldLabel="Publishers" name="publisher"
+      placeholder="Choose publishers..."
+      id="typeahead"
+      options={options} />
   )
 }

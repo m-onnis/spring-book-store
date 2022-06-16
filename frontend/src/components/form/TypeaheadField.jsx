@@ -1,9 +1,9 @@
 import React from 'react'
-import { useController/*, useFormContext */ } from 'react-hook-form'
+import { useController } from 'react-hook-form'
 import Form from 'react-bootstrap/Form'
 import { Typeahead } from 'react-bootstrap-typeahead'
 
-export default function TypeaheadField ({ fieldLabel, name, ...props }) {
+export default function TypeaheadField ({ fieldLabel, name, options, ...props }) {
   const {
     field: { ...inputProps },
     fieldState: { error }
@@ -14,17 +14,19 @@ export default function TypeaheadField ({ fieldLabel, name, ...props }) {
 
   const invalid = error !== undefined
 
-  if (error) {
-    console.log(error)
-  }
-
   const getComponent = () => <Typeahead
     { ...inputProps } {...props}
+    options={options}
+
     // needed to fix Form.Control.Feedback visibility
     // see https://github.com/ericgio/react-bootstrap-typeahead/issues/432
     // see https://codesandbox.io/s/4w01px4z6x
     className={ invalid ? 'is-invalid' : ''}
-    isInvalid={ invalid } />
+    isInvalid={ invalid }
+
+    // 'selected' property should be used in controlled scenario - like this
+    selected={ inputProps.value }
+    />
 
   return <>
     {fieldLabel !== undefined ? <Form.Label>{fieldLabel}</Form.Label> : null}
