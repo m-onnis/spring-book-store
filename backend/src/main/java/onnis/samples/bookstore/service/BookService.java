@@ -3,14 +3,14 @@ package onnis.samples.bookstore.service;
 import lombok.RequiredArgsConstructor;
 import onnis.samples.bookstore.model.Author;
 import onnis.samples.bookstore.model.Book;
-import onnis.samples.bookstore.model.BookCreationDto;
+import onnis.samples.bookstore.dto.BookCreationDto;
 import onnis.samples.bookstore.model.Publisher;
 import onnis.samples.bookstore.repository.AuthorRepository;
 import onnis.samples.bookstore.repository.BookRepository;
 import onnis.samples.bookstore.repository.PublisherRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -19,6 +19,11 @@ public class BookService {
     private final BookRepository bookRepo;
     private final AuthorRepository authorRepo;
     private final PublisherRepository publisherRepo;
+
+    @Transactional(readOnly = true)
+    public List<Book> findAll() {
+        return bookRepo.findAll();
+    }
 
     @Transactional
     public Book create(BookCreationDto bookDto) {

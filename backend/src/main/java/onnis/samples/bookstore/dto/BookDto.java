@@ -1,4 +1,4 @@
-package onnis.samples.bookstore.model;
+package onnis.samples.bookstore.dto;
 
 import lombok.Value;
 
