@@ -1,4 +1,4 @@
-package onnis.samples.bookstore.model;
+package com.env.bookstore.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;

@@ -1,9 +1,9 @@
-package onnis.samples.bookstore.service;
+package com.env.bookstore.service;
 
 import lombok.RequiredArgsConstructor;
-import onnis.samples.bookstore.model.Publisher;
-import onnis.samples.bookstore.dto.PublisherDto;
-import onnis.samples.bookstore.repository.PublisherRepository;
+import com.env.bookstore.model.Publisher;
+import com.env.bookstore.dto.PublisherDto;
+import com.env.bookstore.repository.PublisherRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

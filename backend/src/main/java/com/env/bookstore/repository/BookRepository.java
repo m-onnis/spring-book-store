@@ -1,7 +1,7 @@
-package onnis.samples.bookstore.repository;
+package com.env.bookstore.repository;
 
-import onnis.samples.bookstore.model.Book;
-import onnis.samples.bookstore.dto.BookDto;
+import com.env.bookstore.model.Book;
+import com.env.bookstore.dto.BookDto;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 

@@ -1,4 +1,4 @@
-package onnis.samples.bookstore.model;
+package com.env.bookstore.model;
 
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;

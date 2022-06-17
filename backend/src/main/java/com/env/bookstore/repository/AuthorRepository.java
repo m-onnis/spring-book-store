@@ -1,6 +1,6 @@
-package onnis.samples.bookstore.repository;
+package com.env.bookstore.repository;
 
-import onnis.samples.bookstore.model.Author;
+import com.env.bookstore.model.Author;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AuthorRepository extends JpaRepository<Author, Long> {

@@ -1,4 +1,4 @@
-package onnis.samples.bookstore.dto;
+package com.env.bookstore.dto;
 
 import lombok.*;
 

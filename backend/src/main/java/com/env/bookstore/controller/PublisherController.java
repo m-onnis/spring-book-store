@@ -1,9 +1,9 @@
-package onnis.samples.bookstore.controller;
+package com.env.bookstore.controller;
 
 import lombok.RequiredArgsConstructor;
-import onnis.samples.bookstore.model.Publisher;
-import onnis.samples.bookstore.dto.PublisherDto;
-import onnis.samples.bookstore.service.PublisherService;
+import com.env.bookstore.model.Publisher;
+import com.env.bookstore.dto.PublisherDto;
+import com.env.bookstore.service.PublisherService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;

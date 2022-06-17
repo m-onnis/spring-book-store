@@ -5,9 +5,9 @@ plugins {
     id 'java'
 }
 
-group = 'onnis.samples.bookstore'
+group = 'com.env'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '17'
+sourceCompatibility = '1.8'
 
 repositories {
     mavenCentral()
@@ -16,17 +16,10 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
-
-    // exclude tomcat and set undertow
-    implementation 'org.springframework.boot:spring-boot-starter-undertow'
-    implementation ('org.springframework.boot:spring-boot-starter-web') {
-        exclude group: 'org.springframework.boot', module:'spring-boot-starter-tomcat'
-    }
+    implementation ('org.springframework.boot:spring-boot-starter-web')
 
     runtimeOnly 'com.h2database:h2'
-
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
-
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
