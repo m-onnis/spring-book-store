@@ -37,6 +37,14 @@ export const apiSlice = createApi({
       invalidatesTags: ['books']
     }),
 
+    deleteBook: builder.mutation({
+      query: (id) => ({
+        url: `/books/${id}`,
+        method: 'DELETE'
+      }),
+      invalidatesTags: ['books']
+    }),
+
     createPublisher: builder.mutation({
       query: (publisher) => ({
         url: '/publishers',
@@ -63,6 +71,7 @@ export const {
   useGetAuthorsQuery,
   useGetPublishersQuery,
   useCreateBookMutation,
+  useDeleteBookMutation,
   useCreatePublisherMutation,
   useCreateAuthorMutation
 } = apiSlice

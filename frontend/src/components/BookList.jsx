@@ -1,10 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Card from 'react-bootstrap/Card'
 import ListGroup from 'react-bootstrap/ListGroup'
+import Button from 'react-bootstrap/Button'
+import { FaTrash } from 'react-icons/fa'
+import Modal from 'react-bootstrap/Modal'
 
-import { useGetBooksQuery } from '../redux/apislice'
+import { useDeleteBookMutation, useGetBooksQuery } from '../redux/apislice'
 
 import NewBookForm from './NewBookForm'
 
@@ -13,13 +16,44 @@ const BookRow = ({ book }) => {
     .map(a => `${a.firstName} ${a.lastName}`)
     .join(', ')
 
+  const [deleteBook/* , { error } */] = useDeleteBookMutation()
+  const [showModal, setShowModal] = useState(false)
+  const closeModal = () => setShowModal(false)
+
+  const deleteBookAndCloseModal = (id) => {
+    deleteBook(id)
+    closeModal()
+  }
+
   return <ListGroup.Item>
     <Row>
-      <Col>{book.title}</Col>
-      <Col>{book.isbn}</Col>
-      <Col>{book.publisher.name}</Col>
+      <Col sm={3}>{book.title}</Col>
+      <Col sm={2}>{book.isbn}</Col>
+      <Col sm={2}>{book.publisher.name}</Col>
       <Col>{authors}</Col>
+      <Col sm="auto">
+        <Button variant="success" onClick={ () => setShowModal(true) } className="ms-1" size="sm">
+          <FaTrash cursor="pointer" title="Delete" />
+        </Button>
+      </Col>
     </Row>
+
+    <Modal show={ showModal } onHide={ closeModal }>
+      <Modal.Header closeButton>
+        <Modal.Title>Delete confirmation</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        You confirm the deletion of book <strong>{ book.title }</strong>?
+      </Modal.Body>
+      <Modal.Footer>
+        <Button variant="secondary" onClick={ closeModal }>
+          No
+        </Button>
+        <Button variant="success" onClick={ () => deleteBookAndCloseModal(book.id) }>
+          Yes
+        </Button>
+      </Modal.Footer>
+    </Modal>
   </ListGroup.Item>
 }
 
@@ -49,9 +83,9 @@ export default function BookList () {
 
         <ListGroup.Item>
           <Row>
-            <Col><strong>Title</strong></Col>
-            <Col><strong>ISBN</strong></Col>
-            <Col><strong>Publisher</strong></Col>
+            <Col sm={3}><strong>Title</strong></Col>
+            <Col sm={2}><strong>ISBN</strong></Col>
+            <Col sm={2}><strong>Publisher</strong></Col>
             <Col><strong>Authors</strong></Col>
           </Row>
         </ListGroup.Item>

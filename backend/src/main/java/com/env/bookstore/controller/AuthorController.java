@@ -21,7 +21,6 @@ public class AuthorController {
     private final AuthorService authorService;
 
     @GetMapping
-    @ResponseStatus(HttpStatus.OK)
     List<Author> authors() {
         return authorService.findAll();
     }

@@ -42,4 +42,9 @@ public class BookService {
 
         return bookRepo.save(book);
     }
+
+    @Transactional
+    public void delete(Long id) {
+        bookRepo.deleteById(id);
+    }
 }

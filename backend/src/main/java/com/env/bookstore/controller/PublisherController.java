@@ -21,7 +21,6 @@ public class PublisherController {
     private final PublisherService publisherService;
 
     @GetMapping
-    @ResponseStatus(HttpStatus.OK)
     List<Publisher> publishers() {
         return publisherService.findAll();
     }

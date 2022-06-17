@@ -21,7 +21,6 @@ public class BookController {
     private final BookService bookService;
 
     @GetMapping
-    @ResponseStatus(HttpStatus.OK)
     List<Book> books() {
         return bookService.findAll();
     }
@@ -30,5 +29,10 @@ public class BookController {
     @ResponseStatus(HttpStatus.CREATED)
     Book createBook(@Valid @RequestBody BookCreationDto bookDto) {
         return bookService.create(bookDto);
+    }
+
+    @DeleteMapping("{id}")
+    void deleteBook(@PathVariable Long id) {
+        bookService.delete(id);
     }
 }
