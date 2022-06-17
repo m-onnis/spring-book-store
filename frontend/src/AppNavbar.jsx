@@ -10,10 +10,9 @@ export default function AppNavbar () {
         <FaBook size={'1.5em'} className="ms-2"/> <strong>THE BOOK STORE</strong>
       </Navbar.Brand>
       <Nav className="me-auto">
-        <LinkContainer to="/home"><Nav.Link>Home</Nav.Link></LinkContainer>
+        <LinkContainer to="/books"><Nav.Link>Books</Nav.Link></LinkContainer>
         <LinkContainer to="/authors"><Nav.Link>Authors</Nav.Link></LinkContainer>
         <LinkContainer to="/publishers"><Nav.Link>Publishers</Nav.Link></LinkContainer>
-
         <LinkContainer to="/bootstrap"><Nav.Link>Bootstrap</Nav.Link></LinkContainer>
       </Nav>
     </Container>

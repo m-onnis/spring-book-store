@@ -2,6 +2,6 @@ import React from 'react'
 
 import BookList from '../components/BookList'
 
-export default function HomePage () {
+export default function BooksPage () {
   return <BookList />
 }
