@@ -14,11 +14,11 @@ import java.util.List;
 public class AuthorService {
     private final AuthorRepository authorRepo;
 
-
     @Transactional(readOnly = true)
     public List<Author> findAll() {
         return authorRepo.findAll();
     }
+
     @Transactional
     public Author create(AuthorCreationDto authorDto) {
         Author author = Author.builder()
