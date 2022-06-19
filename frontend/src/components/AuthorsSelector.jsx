@@ -10,7 +10,7 @@ export default function AuthorsSelector () {
   if (isLoading) return null
 
   // typeahead controls want { id, label } objects
-  const options = authors.map(a => ({
+  const options = authors?.map(a => ({
     id: a.id, label: `${a.firstName} ${a.lastName}`
   }))
 

@@ -10,7 +10,7 @@ export default function PublisherSelector () {
   if (isLoading) return null
 
   // typeahead controls want { id, label } objects
-  const options = publishers.map(p => ({
+  const options = publishers?.map(p => ({
     id: p.id, label: p.name
   }))
 
