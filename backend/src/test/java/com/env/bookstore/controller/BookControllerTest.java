@@ -122,6 +122,8 @@ class BookControllerTest {
         @Test
         @DisplayName("should fail deleting an entity that doesn't exists and return NOT FOUND")
         void deleteNotExistingBook() throws Exception {
+            // this is the exception thrown by underlying JPA repository
+            // when the entity to be deleted is not found
             doThrow(EmptyResultDataAccessException.class).when(bookService).delete(anyLong());
 
             MvcResult result = mvc.perform(delete("/books/{id}", "60")
