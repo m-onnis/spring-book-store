@@ -32,8 +32,3 @@ spring:
     driverClassName: org.h2.Driver
     username: sa
     password: password
-
-#  jackson:
-#    serialization:
-#      # avoid errors with empty associations
-#      fail-on-empty-beans: false
