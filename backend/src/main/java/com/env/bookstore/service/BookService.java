@@ -1,5 +1,6 @@
 package com.env.bookstore.service;
 
+import com.env.bookstore.dto.BookDto;
 import lombok.RequiredArgsConstructor;
 import com.env.bookstore.model.Author;
 import com.env.bookstore.model.Book;
@@ -23,6 +24,11 @@ public class BookService {
     @Transactional(readOnly = true)
     public List<Book> findAll() {
         return bookRepo.findAll();
+    }
+
+    @Transactional
+    public List<BookDto> finAllProjected() {
+        return bookRepo.findAllProjectedBy(BookDto.class);
     }
 
     @Transactional

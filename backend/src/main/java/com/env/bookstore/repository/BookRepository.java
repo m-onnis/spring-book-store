@@ -12,5 +12,5 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     @Override
     List<Book> findAll();
 
-    List<BookDto> findAllProjectedBy();
+    <T> List<T> findAllProjectedBy(Class<T> clazz);
 }
