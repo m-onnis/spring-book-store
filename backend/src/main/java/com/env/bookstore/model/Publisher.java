@@ -4,7 +4,6 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.Entity;
-import javax.persistence.Table;
 
 @SuperBuilder
 @NoArgsConstructor

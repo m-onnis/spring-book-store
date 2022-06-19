@@ -13,15 +13,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class BookCreationDto {
-    @NotBlank
-    private String isbn;
-
-    @NotBlank
-    private String title;
-
-    @NotEmpty
-    private List<Long> authors;
-
-    @NotNull
-    private Long publisher;
+    @NotBlank private String isbn;
+    @NotBlank private String title;
+    @NotEmpty private List<Long> authors;
+    @NotNull private Long publisher;
 }

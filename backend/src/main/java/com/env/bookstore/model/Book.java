@@ -1,12 +1,10 @@
 package com.env.bookstore.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Set;
 
@@ -18,15 +16,15 @@ import java.util.Set;
 
 @Entity
 public class Book extends BaseEntity {
-    @NotBlank private String isbn;
-    @NotBlank private String title;
+    @NotNull private String isbn;
+    @NotNull private String title;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany
     @JsonManagedReference
     @Singular
     private Set<Author> authors;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @NotNull
     private Publisher publisher;
 }

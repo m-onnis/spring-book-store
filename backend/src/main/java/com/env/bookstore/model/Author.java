@@ -19,7 +19,6 @@ public class Author extends BaseEntity {
     @NotBlank private String firstName;
     @NotBlank private String lastName;
 
-    // @JsonIgnore
     @JsonBackReference
     @ManyToMany(mappedBy = "authors")
     Set<Book> books;
