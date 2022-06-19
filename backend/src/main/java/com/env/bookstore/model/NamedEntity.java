@@ -4,7 +4,7 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.MappedSuperclass;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
@@ -14,5 +14,6 @@ import javax.validation.constraints.NotBlank;
 
 @MappedSuperclass
 public class NamedEntity extends BaseEntity {
-    @NotBlank private String name;
+    @NotNull
+    private String name;
 }

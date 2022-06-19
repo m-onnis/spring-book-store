@@ -5,7 +5,7 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 @Getter
@@ -16,8 +16,8 @@ import java.util.Set;
 
 @Entity
 public class Author extends BaseEntity {
-    @NotBlank private String firstName;
-    @NotBlank private String lastName;
+    @NotNull private String firstName;
+    @NotNull private String lastName;
 
     @JsonBackReference
     @ManyToMany(mappedBy = "authors")
