@@ -1,56 +1,64 @@
 package com.env.bookstore.service;
 
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.env.bookstore.dto.BookCreationDto;
 import com.env.bookstore.dto.BookDto;
-import lombok.RequiredArgsConstructor;
 import com.env.bookstore.model.Author;
 import com.env.bookstore.model.Book;
-import com.env.bookstore.dto.BookCreationDto;
 import com.env.bookstore.model.Publisher;
 import com.env.bookstore.repository.AuthorRepository;
 import com.env.bookstore.repository.BookRepository;
 import com.env.bookstore.repository.PublisherRepository;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import lombok.RequiredArgsConstructor;
+
 
 @Service
 @RequiredArgsConstructor
-public class BookService {
+public class BookService
+{
     private final BookRepository bookRepo;
     private final AuthorRepository authorRepo;
     private final PublisherRepository publisherRepo;
 
     @Transactional(readOnly = true)
-    public List<Book> findAll() {
+    public List<Book> findAll()
+    {
         return bookRepo.findAll();
     }
 
     @Transactional
-    public List<BookDto> finAllProjected() {
+    public List<BookDto> finAllProjected()
+    {
         return bookRepo.findAllProjectedBy(BookDto.class);
     }
 
     @Transactional
-    public Book create(BookCreationDto bookDto) {
-        List<Author> authors = authorRepo.findAllById(bookDto.getAuthors());
+    public Book create(final BookCreationDto bookDto)
+    {
+        final List<Author> authors = authorRepo.findAllById(bookDto.getAuthors());
 
         // java.util.NoSuchElementException if not found
-        Publisher publisher = publisherRepo.findById(bookDto.getPublisher())
-                .orElseThrow();
+        final Publisher publisher = publisherRepo.findById(bookDto.getPublisher())
+            .orElseThrow();
 
-        Book book = Book.builder()
-                .isbn(bookDto.getIsbn())
-                .title(bookDto.getTitle())
-                .authors(authors)
-                .publisher(publisher)
-                .build();
+        final Book book = Book.builder()
+            .isbn(bookDto.getIsbn())
+            .title(bookDto.getTitle())
+            .authors(authors)
+            .publisher(publisher)
+            .build();
 
         return bookRepo.save(book);
     }
 
     @Transactional
-    public void delete(Long id) {
+    public void delete(final Long id)
+    {
         bookRepo.deleteById(id);
     }
 }
